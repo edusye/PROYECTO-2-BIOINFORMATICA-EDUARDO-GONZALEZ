@@ -5,13 +5,15 @@
 package Interfaz;
 
 /**
- *
+ * Clase que representa la ventana principal del programa
+ * <p>Esta ventana contiene todos los botones para las funcionalidades solicitadas
  * @author edusye
  */
 public class Ventana1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form Ventana1
+     * Constructor de la clase Ventana1.
+     * <p>Inicializa todos los componentes de la interfaz gráfica.</p>
      */
     public Ventana1() {
         initComponents();
@@ -124,6 +126,10 @@ public class Ventana1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Método principal para ejecutar la aplicación de forma independiente.
+     * 
+     * <p>Este método configura y crea una instancia de
+     *  Ventana1 para mostrar la interfaz principal.</p>
      * @param args the command line arguments
      */
     public static void main(String args[]) {

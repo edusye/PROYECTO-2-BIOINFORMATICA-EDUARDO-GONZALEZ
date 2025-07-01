@@ -7,11 +7,24 @@ package Codigo;
 import Interfaz.Ventana1;
 
 /**
- *
+ * Clase principal de la aplicación que contiene el punto de entrada del programa.
+ * <p>Esta clase es responsable de inicializar y mostrar la interfaz gráfica
+ * principal de la aplicación mediante la creación de una instancia de Ventana1.</p>
  * @author edusye
  */
 public class Main {
 
+     /**
+     * Constructor por defecto de la clase Main.
+     * 
+     * <p>Este constructor no realiza ninguna inicialización específica
+     * ya que la clase Main solo contiene métodos estáticos y no requiere
+     * estado de instancia.</p>
+     */
+    public Main() {
+        // Constructor por defecto - no requiere inicialización específica
+    }
+    
     /**
      * Método principal que sirve como punto de entrada de la aplicación.
      * 

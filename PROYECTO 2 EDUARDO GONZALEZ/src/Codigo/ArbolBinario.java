@@ -7,13 +7,12 @@ package Codigo;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
- * Implementación  de un Árbol Binario de Búsqueda para el analisis de ADN.
- * 
+ * Clase para la implementacion de un Árbol Binario de Búsqueda para el analisis de ADN.
  * @author edusye
  */
 public class ArbolBinario {
-    
     private Nodo raiz;
     
     /**

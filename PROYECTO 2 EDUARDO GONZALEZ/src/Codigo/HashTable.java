@@ -7,8 +7,8 @@ package Codigo;
 import java.util.ArrayList;
 
 /**
- * HashTable simple con tamaño variable y manejo básico de colisiones
- * Implementa una tabla hash que se redimensiona automáticamente cuando se llena
+ * Clase que implementa un HashTable simple con tamaño variable y manejo básico de colisiones
+ * 
  * 
  * @param <K> Tipo de datos para las claves
  * @param <V> Tipo de datos para los valores
