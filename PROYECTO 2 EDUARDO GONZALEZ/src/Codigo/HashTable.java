@@ -86,7 +86,6 @@ public class HashTable<K, V> {
         Nodo[] TablaAnterior = tabla;
         int TamañoAnterior = tamaño;
         
-        // Crear nueva tabla
         tamaño = nuevoTamaño;
         tabla = (Nodo[]) new Object[tamaño];
         elementos = 0;
