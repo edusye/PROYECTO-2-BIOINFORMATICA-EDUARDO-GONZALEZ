@@ -12,7 +12,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Tercera ventana del programa
+ * Esta ventana permite buscar y mostrar los datos de un patron en especifico.
  * @author edusye
  */
 public class Ventana3 extends javax.swing.JFrame {
@@ -176,8 +177,8 @@ public class Ventana3 extends javax.swing.JFrame {
     
    /**
     * Maneja el evento de clic del botón BUSCAR.
-    * Realiza la búsqueda de un patrón seleccionado en el ComboBox (PATRONES) 
-    * Muestra los resultados en el textarea (RESULTADO).
+    * Realiza la búsqueda de un patrón seleccionado en el ComboBox llamado PATRONES. 
+    * Muestra los resultados en el textarea llamado RESULTADO.
     * 
     * @param evt El evento de clic del mouse que desencadena esta acción.
     * 
@@ -190,8 +191,6 @@ public class Ventana3 extends javax.swing.JFrame {
     private void BUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BUSCARMouseClicked
         try {
             String patronSeleccionado = (String) PATRONES.getSelectedItem();
-            
-            // Validar selección
             if (patronSeleccionado == null || 
                 patronSeleccionado.equals("-- Selecciona un patrón--") ||
                 patronSeleccionado.equals("No hay patrones disponibles")) {
@@ -223,7 +222,7 @@ public class Ventana3 extends javax.swing.JFrame {
             }
             
         RESULTADO.setText(resultado.toString());
-            RESULTADO.setCaretPosition(0); // Scroll al inicio
+            RESULTADO.setCaretPosition(0); 
             
         } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(this, 

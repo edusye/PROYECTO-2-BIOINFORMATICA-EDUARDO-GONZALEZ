@@ -176,8 +176,6 @@ public class Ventana1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, carga un archivo de ADN primero.", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        // 2. Validate if the sequence is long enough for at least one triplet
         if (adn.getLongitudSecuencia() < 3) {
             JOptionPane.showMessageDialog(this, "La secuencia de ADN es demasiado corta para formar patrones de 3 caracteres.", "Error", JOptionPane.WARNING_MESSAGE);
             return;
@@ -204,10 +202,7 @@ public class Ventana1 extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Por favor, carga un archivo de ADN primero.", "Error", JOptionPane.WARNING_MESSAGE);
         return;
         }
-
-        // Verificar si hay patrones cargados, si no, cargarlos
         if (!solucion.tienePatronesCargados()) {
-            // Cargar los patrones primero
             solucion.OrdenadosPorFrecuencia();
         }
 

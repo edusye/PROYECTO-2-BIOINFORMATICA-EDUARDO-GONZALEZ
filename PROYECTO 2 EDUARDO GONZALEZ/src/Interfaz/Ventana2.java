@@ -8,7 +8,8 @@ import Codigo.ArbolBinario;
 import java.util.List;
 
 /**
- *
+ * Segunda ventana del programa
+ * Esta ventana contiene la lista de patrones almacenados y las muestra en un ScrollPanel
  * @author edusye
  */
 public class Ventana2 extends javax.swing.JFrame {

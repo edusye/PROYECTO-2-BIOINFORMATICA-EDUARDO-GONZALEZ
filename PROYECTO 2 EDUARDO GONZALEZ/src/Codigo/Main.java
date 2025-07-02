@@ -22,7 +22,6 @@ public class Main {
      * estado de instancia.</p>
      */
     public Main() {
-        // Constructor por defecto - no requiere inicialización específica
     }
     
     /**
@@ -37,7 +36,6 @@ public class Main {
      * @param args the command line arguments
     */
     public static void main(String[] args) {
-        // Constructor por defecto - no requiere inicialización específica
         Ventana1 v1 = new Ventana1();
         v1.setLocationRelativeTo(null);
         v1.setVisible(true);
