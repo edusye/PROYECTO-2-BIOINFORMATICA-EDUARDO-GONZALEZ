@@ -40,7 +40,7 @@ public class Main {
         // Constructor por defecto - no requiere inicialización específica
         Ventana1 v1 = new Ventana1();
         v1.setLocationRelativeTo(null);
-        v1.show();
+        v1.setVisible(true);
     }
     
 }

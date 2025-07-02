@@ -4,19 +4,29 @@
  */
 package Interfaz;
 
+import Codigo.Adn;
+import Codigo.Solucion;
+import java.util.List;
+import javax.swing.JOptionPane;
+import Codigo.ArbolBinario;
+
 /**
  * Clase que representa la ventana principal del programa
- * <p>Esta ventana contiene todos los botones para las funcionalidades solicitadas
+ * Esta ventana contiene todos los botones para las funcionalidades solicitadas
  * @author edusye
  */
 public class Ventana1 extends javax.swing.JFrame {
-
+    private Adn adn;
+    private Solucion solucion;
+    
     /**
      * Constructor de la clase Ventana1.
      * <p>Inicializa todos los componentes de la interfaz gráfica.</p>
      */
     public Ventana1() {
         initComponents();
+        adn = new Adn();
+        solucion = new Solucion(adn);
     }
 
     /**
@@ -58,18 +68,33 @@ public class Ventana1 extends javax.swing.JFrame {
         CARGAR.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         CARGAR.setText("CARGAR ARCHIVO");
         CARGAR.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CARGAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CARGARMouseClicked(evt);
+            }
+        });
         jPanel1.add(CARGAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, 50));
 
         PATRONES.setBackground(new java.awt.Color(255, 153, 153));
         PATRONES.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         PATRONES.setText("LISTA DE PATRONES");
         PATRONES.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        PATRONES.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PATRONESMouseClicked(evt);
+            }
+        });
         jPanel1.add(PATRONES, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, 50));
 
         BUSCAR.setBackground(new java.awt.Color(255, 153, 153));
         BUSCAR.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         BUSCAR.setText("BUSCAR PATRON");
         BUSCAR.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BUSCAR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BUSCARMouseClicked(evt);
+            }
+        });
         jPanel1.add(BUSCAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, -1, 50));
 
         FRECUENTE.setBackground(new java.awt.Color(255, 153, 153));
@@ -126,10 +151,82 @@ public class Ventana1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Maneja el evento de clic del botón CARGAR.
+     * Intenta cargar un archivo de ADN y muestra un mensaje informativo del resultado.
+     * 
+     * @param evt El evento de clic del mouse
+     */
+    private void CARGARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CARGARMouseClicked
+        if (adn.CargarArchivo()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Archivo cargado exitosamente.\nLongitud de la secuencia: " + adn.getLongitudSecuencia(), "Carga Exitosa", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se pudo cargar el archivo o la secuencia es inválida.", "Error de Carga", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_CARGARMouseClicked
+
+    /**
+     * Maneja el evento de clic del botón PATRONES.
+     * Valida que haya una secuencia cargada, obtiene los patrones ordenados por frecuencia
+     * Abre la ventana de visualización de patrones (Ventana2).
+     * 
+     * @param evt El evento de clic del mouse
+     */
+    private void PATRONESMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PATRONESMouseClicked
+        if (!adn.tieneSecuenciaCargada()) {
+            JOptionPane.showMessageDialog(this, "Por favor, carga un archivo de ADN primero.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 2. Validate if the sequence is long enough for at least one triplet
+        if (adn.getLongitudSecuencia() < 3) {
+            JOptionPane.showMessageDialog(this, "La secuencia de ADN es demasiado corta para formar patrones de 3 caracteres.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        List<ArbolBinario.Nodo> patronesObtenidos = (List<ArbolBinario.Nodo>) solucion.OrdenadosPorFrecuencia();
+
+        Ventana2 ventana2 = new Ventana2(this);
+        ventana2.mostrarPatrones(patronesObtenidos); 
+        ventana2.setVisible(true);
+        ventana2.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_PATRONESMouseClicked
+
+    /**
+     * Maneja el evento de clic del botón BUSCAR.
+     * Valida que haya una secuencia cargada, carga los patrones si es necesario
+     * Abre la ventana de búsqueda de patrones (Ventana3).
+     * 
+      * @param evt El evento de clic del mouse
+    */
+    private void BUSCARMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BUSCARMouseClicked
+        if (!adn.tieneSecuenciaCargada()) {
+        JOptionPane.showMessageDialog(this, "Por favor, carga un archivo de ADN primero.", "Error", JOptionPane.WARNING_MESSAGE);
+        return;
+        }
+
+        // Verificar si hay patrones cargados, si no, cargarlos
+        if (!solucion.tienePatronesCargados()) {
+            // Cargar los patrones primero
+            solucion.OrdenadosPorFrecuencia();
+        }
+
+        if (!solucion.tienePatronesCargados()) {
+            JOptionPane.showMessageDialog(this, "No se pudieron cargar los patrones de ADN.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Ventana3 ventana3 = new Ventana3(this, solucion);
+        ventana3.setVisible(true);
+        ventana3.setLocationRelativeTo(null);
+        this.setVisible(false);
+    }//GEN-LAST:event_BUSCARMouseClicked
+
+    /**
      * Método principal para ejecutar la aplicación de forma independiente.
      * 
-     * <p>Este método configura y crea una instancia de
-     *  Ventana1 para mostrar la interfaz principal.</p>
+     * Este método configura y crea una instancia de Ventana1 para mostrar la interfaz principal.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -157,10 +254,8 @@ public class Ventana1 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Ventana1().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Ventana1().setVisible(true);
         });
     }
 

@@ -18,61 +18,61 @@ public class ArbolBinario {
     /**
      * Clase interna que representa un nodo del árbol
      */
-    class Nodo {
-        String patron;
-        int frecuencia;
-        List<Integer> posiciones;
+    public class Nodo {
+        public String patron;
+        public int frecuencia;
+        public List<Integer> posiciones;
         Nodo izquierdo, derecho;
         
         /**
-         * Constructor del nodo
+         * Constructor del nodo.
          * 
-         * @param patron el patrón de ADN a almacenar
+         * @param patron el patrón de ADN a almacenar.
          * @param posicion la posición inicial donde se encontró el patrón
          */
-        Nodo(String patron, int posicion) {
+        Nodo(String patron, int posicionTripleta) {
             this.patron = patron;
             this.frecuencia = 1;
             this.posiciones = new ArrayList<>();
-            this.posiciones.add(posicion);
+            this.posiciones.add(posicionTripleta);
         }
     }
     
     /**
-     * Inserta un patrón en el árbol o incrementa su frecuencia si ya existe
+     * Inserta un patrón en el árbol o incrementa su frecuencia si ya existe.
      * 
      * @param patron el patrón de ADN a insertar
-     * @param posicion la posición donde se encontró el patrón
+     * @param posicionTripleta la posición donde se encontró el patrón
      */
-    public void insertar(String patron, int posicion) {
-        raiz = insertar(raiz, patron, posicion);
+    public void insertar(String patron, int posicionTripleta) {
+        raiz = insertar(raiz, patron, posicionTripleta);
     }
     
     /**
-     * Método auxiliar recursivo para insertar un patrón
+     * Método auxiliar recursivo para insertar un patrón.
      * 
      * @param nodo el nodo actual en la recursión
      * @param patron el patrón a insertar
      * @param posicion la posición del patrón
      * @return el nodo actualizado
      */
-    private Nodo insertar(Nodo nodo, String patron, int posicion) {
-        if (nodo == null) return new Nodo(patron, posicion);
+    private Nodo insertar(Nodo nodo, String patron, int valor) {
+        if (nodo == null) return new Nodo(patron, valor);
         
         int comp = patron.compareTo(nodo.patron);
         if (comp < 0) {
-            nodo.izquierdo = insertar(nodo.izquierdo, patron, posicion);
+            nodo.izquierdo = insertar(nodo.izquierdo, patron, valor);
         } else if (comp > 0) {
-            nodo.derecho = insertar(nodo.derecho, patron, posicion);
+            nodo.derecho = insertar(nodo.derecho, patron, valor);
         } else {
             nodo.frecuencia++;
-            nodo.posiciones.add(posicion);
+            nodo.posiciones.add(valor);
         }
         return nodo;
     }
     
     /**
-     * Busca un patrón específico en el árbol
+     * Busca un patrón específico en el árbol.
      * 
      * @param patron el patrón a buscar
      * @return el nodo que contiene el patrón, o null si no se encuentra
@@ -82,7 +82,7 @@ public class ArbolBinario {
     }
     
     /**
-     * Método auxiliar recursivo para buscar un patrón
+     * Método auxiliar recursivo para buscar un patrón.
      * 
      * @param nodo el nodo actual en la recursión
      * @param patron el patrón a buscar
@@ -97,11 +97,11 @@ public class ArbolBinario {
     }
     
     /**
-     * Obtiene todos los patrones ordenados por frecuencia
+     * Obtiene todos los patrones ordenados por frecuencia.
      * 
      * @return lista de nodos ordenados por frecuencia de mayor a menor
      */
-    public List<Nodo> obtenerPatronesOrdenadosPorFrecuencia() {
+    public List<Nodo> OrdenadosPorFrecuencia() {
         List<Nodo> patrones = new ArrayList<>();
         recorrerEnOrden(raiz, patrones);
         patrones.sort((n1, n2) -> Integer.compare(n2.frecuencia, n1.frecuencia));
@@ -109,11 +109,11 @@ public class ArbolBinario {
     }
     
     /**
-     * Obtiene todos los patrones ordenados alfabéticamente
+     * Obtiene todos los patrones ordenados alfabéticamente.
      * 
      * @return lista de nodos ordenados alfabéticamente
      */
-    public List<Nodo> obtenerPatronesOrdenadosAlfabeticamente() {
+    public List<Nodo> OrdenadosAlfabeticamente() {
         List<Nodo> patrones = new ArrayList<>();
         recorrerEnOrden(raiz, patrones);
         return patrones;
@@ -152,7 +152,7 @@ public class ArbolBinario {
     }
     
     /**
-     * Método auxiliar recursivo para calcular la altura
+     * Método auxiliar recursivo para calcular la altura.
      * 
      * @param nodo el nodo actual en la recursión
      * @return la altura del subárbol con raíz en el nodo dado
@@ -162,22 +162,22 @@ public class ArbolBinario {
     }
     
     /**
-     * Obtiene el patrón con mayor frecuencia
+     * Obtiene el patrón con mayor frecuencia.
      * 
      * @return el nodo con el patrón más frecuente, o null si el árbol está vacío
      */
     public Nodo patronMasFrecuente() {
-        List<Nodo> patrones = obtenerPatronesOrdenadosPorFrecuencia();
+        List<Nodo> patrones = OrdenadosPorFrecuencia();
         return patrones.isEmpty() ? null : patrones.get(0);
     }
     
     /**
-     * Obtiene el patrón con menor frecuencia
+     * Obtiene el patrón con menor frecuencia.
      * 
      * @return el nodo con el patrón menos frecuente, o null si el árbol está vacío
      */
     public Nodo patronMenosFrecuente() {
-        List<Nodo> patrones = obtenerPatronesOrdenadosPorFrecuencia();
+        List<Nodo> patrones = OrdenadosPorFrecuencia();
         return patrones.isEmpty() ? null : patrones.get(patrones.size() - 1);
     }
 }
