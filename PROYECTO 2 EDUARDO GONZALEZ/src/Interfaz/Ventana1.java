@@ -101,12 +101,22 @@ public class Ventana1 extends javax.swing.JFrame {
         FRECUENTE.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         FRECUENTE.setText("PATRON MAS FRECUENTE");
         FRECUENTE.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        FRECUENTE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FRECUENTEMouseClicked(evt);
+            }
+        });
         jPanel1.add(FRECUENTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, 50));
 
         NOFRECUENTE.setBackground(new java.awt.Color(255, 153, 153));
         NOFRECUENTE.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         NOFRECUENTE.setText("PATRON MENOS FRECUENTE");
         NOFRECUENTE.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        NOFRECUENTE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NOFRECUENTEMouseClicked(evt);
+            }
+        });
         jPanel1.add(NOFRECUENTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 360, -1, 50));
 
         REPORTE.setBackground(new java.awt.Color(255, 153, 153));
@@ -216,6 +226,77 @@ public class Ventana1 extends javax.swing.JFrame {
         ventana3.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_BUSCARMouseClicked
+    
+    /**
+     * Maneja el evento de clic del botón FRECUENTE.
+     * Muestra el patrón más frecuente encontrado en la secuencia de ADN.
+     * 
+     * @param evt El evento de clic del mouse
+     */
+    private void FRECUENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FRECUENTEMouseClicked
+        if (!adn.tieneSecuenciaCargada()) {
+            JOptionPane.showMessageDialog(this, "Por favor, carga un archivo de ADN primero.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (adn.getLongitudSecuencia() < 3) {
+            JOptionPane.showMessageDialog(this, "La secuencia de ADN es demasiado corta para formar patrones de 3 caracteres.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!solucion.tienePatronesCargados()) {
+            solucion.OrdenadosPorFrecuencia();
+        }
+
+        ArbolBinario.Nodo patronMasFrecuente = solucion.getPatronMasFrecuente();
+
+        if (patronMasFrecuente == null) {
+            JOptionPane.showMessageDialog(this, "No se encontraron patrones en la secuencia.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String mensaje = "PATRÓN MÁS FRECUENTE:\n\n" +
+                        "Patrón: " + patronMasFrecuente.patron + "\n" +
+                        "Frecuencia: " + patronMasFrecuente.frecuencia + " veces\n";
+
+
+        JOptionPane.showMessageDialog(this, mensaje, "Patrón Más Frecuente", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_FRECUENTEMouseClicked
+    
+    /**
+     * Maneja el evento de clic del botón NOFRECUENTE.
+     * Muestra el patrón menos frecuente encontrado en la secuencia de ADN.
+     * 
+     * @param evt El evento de clic del mouse
+     */
+    private void NOFRECUENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NOFRECUENTEMouseClicked
+        if (!adn.tieneSecuenciaCargada()) {
+            JOptionPane.showMessageDialog(this, "Por favor, carga un archivo de ADN primero.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (adn.getLongitudSecuencia() < 3) {
+            JOptionPane.showMessageDialog(this, "La secuencia de ADN es demasiado corta para formar patrones de 3 caracteres.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!solucion.tienePatronesCargados()) {
+            solucion.OrdenadosPorFrecuencia();
+        }
+
+        ArbolBinario.Nodo patronMenosFrecuente = solucion.getPatronMenosFrecuente();
+
+        if (patronMenosFrecuente == null) {
+            JOptionPane.showMessageDialog(this, "No se encontraron patrones en la secuencia.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String mensaje = "PATRÓN MENOS FRECUENTE:\n\n" +
+                        "Patrón: " + patronMenosFrecuente.patron + "\n" +
+                        "Frecuencia: " + patronMenosFrecuente.frecuencia + " veces\n" ;
+
+        JOptionPane.showMessageDialog(this, mensaje, "Patrón Menos Frecuente", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_NOFRECUENTEMouseClicked
 
     /**
      * Método principal para ejecutar la aplicación de forma independiente.

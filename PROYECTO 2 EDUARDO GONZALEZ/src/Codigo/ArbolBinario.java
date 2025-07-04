@@ -14,6 +14,8 @@ import java.util.List;
  */
 public class ArbolBinario {
     private Nodo raiz;
+    private Nodo patronMasFrecuente;
+    private Nodo patronMenosFrecuente;
     
     /**
      * Clase interna que representa un nodo del árbol
@@ -57,8 +59,12 @@ public class ArbolBinario {
      * @return el nodo actualizado
      */
     private Nodo insertar(Nodo nodo, String patron, int valor) {
-        if (nodo == null) return new Nodo(patron, valor);
-        
+        if (nodo == null) {
+            Nodo nuevoNodo = new Nodo(patron, valor);
+            actualizarExtremos(nuevoNodo);
+            return nuevoNodo;
+        }
+
         int comp = patron.compareTo(nodo.patron);
         if (comp < 0) {
             nodo.izquierdo = insertar(nodo.izquierdo, patron, valor);
@@ -67,6 +73,7 @@ public class ArbolBinario {
         } else {
             nodo.frecuencia++;
             nodo.posiciones.add(valor);
+            actualizarExtremos(nodo);
         }
         return nodo;
     }
@@ -162,22 +169,45 @@ public class ArbolBinario {
     }
     
     /**
-     * Obtiene el patrón con mayor frecuencia.
+     * Obtiene el patrón más frecuente en O(1).
+     * Mantiene la referencia actualizada durante las inserciones.
      * 
      * @return el nodo con el patrón más frecuente, o null si el árbol está vacío
      */
     public Nodo patronMasFrecuente() {
-        List<Nodo> patrones = OrdenadosPorFrecuencia();
-        return patrones.isEmpty() ? null : patrones.get(0);
+        return patronMasFrecuente;
     }
-    
+
     /**
-     * Obtiene el patrón con menor frecuencia.
+     * Obtiene el patrón menos frecuente en O(1).
+     * Mantiene la referencia actualizada durante las inserciones.
      * 
      * @return el nodo con el patrón menos frecuente, o null si el árbol está vacío
      */
     public Nodo patronMenosFrecuente() {
-        List<Nodo> patrones = OrdenadosPorFrecuencia();
-        return patrones.isEmpty() ? null : patrones.get(patrones.size() - 1);
+        return patronMenosFrecuente;
     }
+    
+    /**
+     * Actualiza las referencias a los patrones más y menos frecuentes
+     */
+    private void actualizarExtremos(Nodo nodo) {
+
+        if (patronMasFrecuente == null || nodo.frecuencia > patronMasFrecuente.frecuencia) {
+            patronMasFrecuente = nodo;
+        }
+
+        if (patronMenosFrecuente == null || nodo.frecuencia < patronMenosFrecuente.frecuencia) {
+            patronMenosFrecuente = nodo;
+        }
+    }
+    
+    /**
+     * Reinicia las referencias para una nueva carga
+     */
+    public void reiniciarExtremos() {
+        patronMasFrecuente = null;
+        patronMenosFrecuente = null;
+    }   
+ 
 }

@@ -34,6 +34,7 @@ public class Solucion {
      * @return Una lista de nodos del árbol (patrones con sus frecuencias y posiciones).
      */
     public List<ArbolBinario.Nodo> OrdenadosPorFrecuencia() {
+        arbolPatrones.reiniciarExtremos();    
         if (!adn.tieneSecuenciaCargada()) {
             System.err.println("Error: No hay secuencia de ADN cargada.");
             return new ArrayList<>();
@@ -46,22 +47,20 @@ public class Solucion {
             System.err.println("Error: La longitud de la secuencia de ADN no es una tripleta (3).");
             return new ArrayList<>();
         }
-        
+
         arbolPatrones = new ArbolBinario();
         tablaHashPatrones = new HashTable<>();
-            
+
         int posicionTripleta = 1;  
         for (int i = 0; i <= secuencia.length() - LONGITUD_PATRON_FIJA; i += LONGITUD_PATRON_FIJA) {
             String patron = secuencia.substring(i, i + LONGITUD_PATRON_FIJA);
             ArbolBinario.Nodo nodoExistente = tablaHashPatrones.get(patron);
-            if (nodoExistente == null) {
-                ArbolBinario.Nodo nuevoNodo = arbolPatrones.new Nodo(patron, posicionTripleta);
-                tablaHashPatrones.put(patron, nuevoNodo);
-                arbolPatrones.insertar(patron, posicionTripleta);
-            } else {
 
-                nodoExistente.frecuencia++;
-                nodoExistente.posiciones.add(posicionTripleta);
+            if (nodoExistente == null) {
+                arbolPatrones.insertar(patron, posicionTripleta);
+                ArbolBinario.Nodo nuevoNodo = arbolPatrones.buscar(patron);
+                tablaHashPatrones.put(patron, nuevoNodo);
+            } else {
                 arbolPatrones.insertar(patron, posicionTripleta);
             } 
             posicionTripleta++;
@@ -69,6 +68,7 @@ public class Solucion {
 
         return arbolPatrones.OrdenadosPorFrecuencia();
     }
+
     
      /**
      * Busca un patrón específico utilizando la HashTable para mayor eficiencia.
@@ -110,5 +110,31 @@ public class Solucion {
      */
     public boolean tienePatronesCargados() {
         return tablaHashPatrones != null && !tablaHashPatrones.isEmpty();
+    }
+    
+    /**
+     * Obtiene el patrón más frecuente en tiempo O(log n) promedio.
+     * Usa el método optimizado del árbol binario.
+     * 
+     * @return El nodo con el patrón más frecuente, o null si no hay patrones
+     */
+    public ArbolBinario.Nodo getPatronMasFrecuente() {
+        if (!tienePatronesCargados()) {
+            return null;
+        }
+        return arbolPatrones.patronMasFrecuente();
+    }
+
+   /**
+    * Obtiene el patrón menos frecuente en tiempo O(log n) promedio.
+    * Usa el método optimizado del árbol binario.
+    * 
+    * @return El nodo con el patrón menos frecuente, o null si no hay patrones
+    */
+    public ArbolBinario.Nodo getPatronMenosFrecuente() {
+        if (!tienePatronesCargados()) {
+            return null;
+        }
+        return arbolPatrones.patronMenosFrecuente();
     }
 }

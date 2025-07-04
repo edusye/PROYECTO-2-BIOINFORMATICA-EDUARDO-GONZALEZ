@@ -182,8 +182,6 @@ public class Ventana3 extends javax.swing.JFrame {
     * 
     * @param evt El evento de clic del mouse que desencadena esta acción.
     * 
-    * @throws HeadlessException Si ocurre un error relacionado con la interfaz gráfica.
-
     * @see ArbolBinario.Nodo
     * @see #solucion
     * @see javax.swing.JOptionPane
