@@ -9,6 +9,7 @@ import Codigo.Solucion;
 import java.util.List;
 import javax.swing.JOptionPane;
 import Codigo.ArbolBinario;
+import java.util.ArrayList;
 
 /**
  * Clase que representa la ventana principal del programa
@@ -123,6 +124,11 @@ public class Ventana1 extends javax.swing.JFrame {
         REPORTE.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         REPORTE.setText("REPORTE DE COLISIONES");
         REPORTE.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        REPORTE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                REPORTEMouseClicked(evt);
+            }
+        });
         jPanel1.add(REPORTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, -1, 50));
 
         LISTA.setBackground(new java.awt.Color(255, 153, 153));
@@ -297,6 +303,39 @@ public class Ventana1 extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, mensaje, "Patrón Menos Frecuente", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_NOFRECUENTEMouseClicked
+    
+    /**
+     * Maneja el evento de clic del botón REPORTE.
+     * Genera y muestra el reporte de colisiones de la tabla hash.
+     * 
+     * @param evt El evento de clic del mouse
+     */
+    private void REPORTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTEMouseClicked
+        if (!adn.tieneSecuenciaCargada()) {
+            JOptionPane.showMessageDialog(this, "Por favor, carga un archivo de ADN primero.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (adn.getLongitudSecuencia() < 3) {
+            JOptionPane.showMessageDialog(this, "La secuencia de ADN es demasiado corta para formar patrones de 3 caracteres.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            ArrayList<String> reporte = solucion.generarReporteColisiones();
+            Ventana4 v4 = new Ventana4(this);
+            v4.mostrarReporte(reporte);
+            v4.setVisible(true);
+            v4.setLocationRelativeTo(null);
+            this.setVisible(false);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, 
+                "Error al generar el reporte: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_REPORTEMouseClicked
 
     /**
      * Método principal para ejecutar la aplicación de forma independiente.

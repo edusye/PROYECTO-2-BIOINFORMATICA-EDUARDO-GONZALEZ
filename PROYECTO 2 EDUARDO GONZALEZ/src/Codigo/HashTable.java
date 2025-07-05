@@ -256,4 +256,51 @@ public class HashTable<K, V> {
         tabla = new Object[tamaño];
         elementos = 0;
     }
+    
+    /**
+     * Genera un reporte de colisiones en la tabla hash.
+     * Identifica patrones diferentes que generan el mismo índice hash.
+     *
+     * @return ArrayList con información de las colisiones encontradas
+     */
+    @SuppressWarnings("unchecked")
+    public ArrayList<String> reporteColisiones() {
+        ArrayList<String> reporte = new ArrayList<>();
+        int colisionesEncontradas = 0;
+
+        for (int i = 0; i < tamaño; i++) {
+            if (tabla[i] != null) {
+                Nodo actual = (Nodo) tabla[i];
+                ArrayList<String> patronesEnPosicion = new ArrayList<>();
+                while (actual != null) {
+                    patronesEnPosicion.add(actual.clave.toString());
+                    actual = actual.siguiente;
+                }
+
+                if (patronesEnPosicion.size() > 1) {
+                    colisionesEncontradas++;
+                    StringBuilder colisionInfo = new StringBuilder();
+                    colisionInfo.append("Colisión en índice ").append(i).append(": ");
+
+                    for (int j = 0; j < patronesEnPosicion.size(); j++) {
+                        colisionInfo.append(patronesEnPosicion.get(j));
+                        if (j < patronesEnPosicion.size() - 1) {
+                            colisionInfo.append(", ");
+                        }
+                    }
+
+                    reporte.add(colisionInfo.toString());
+                }
+            }
+        }
+
+        reporte.add(0, "=== REPORTE DE COLISIONES ===");
+        reporte.add(1, "Total de colisiones encontradas: " + colisionesEncontradas);
+        reporte.add(2, "Factor de carga actual: " + String.format("%.2f", (double) elementos / tamaño));
+        reporte.add(3, "Tamaño de la tabla: " + tamaño);
+        reporte.add(4, "Elementos almacenados: " + elementos);
+        reporte.add(5, ""); 
+
+        return reporte;
+    } 
 }  

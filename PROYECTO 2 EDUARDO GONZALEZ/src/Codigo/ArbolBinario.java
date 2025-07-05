@@ -169,7 +169,7 @@ public class ArbolBinario {
     }
     
     /**
-     * Obtiene el patrón más frecuente en O(1).
+     * Obtiene el patrón más frecuente.
      * Mantiene la referencia actualizada durante las inserciones.
      * 
      * @return el nodo con el patrón más frecuente, o null si el árbol está vacío
@@ -179,7 +179,7 @@ public class ArbolBinario {
     }
 
     /**
-     * Obtiene el patrón menos frecuente en O(1).
+     * Obtiene el patrón menos frecuente.
      * Mantiene la referencia actualizada durante las inserciones.
      * 
      * @return el nodo con el patrón menos frecuente, o null si el árbol está vacío

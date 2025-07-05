@@ -4,7 +4,6 @@
  */
 package Interfaz;
 
-
 import Codigo.ArbolBinario;
 import Codigo.Solucion;
 import java.awt.HeadlessException;
@@ -85,10 +84,12 @@ public class Ventana3 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         RESULTADO = new javax.swing.JTextArea();
         BUSCAR = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(223, 242, 242));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         VOLVER.setBackground(new java.awt.Color(255, 153, 153));
         VOLVER.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
@@ -99,12 +100,16 @@ public class Ventana3 extends javax.swing.JFrame {
                 VOLVERMouseClicked(evt);
             }
         });
+        jPanel1.add(VOLVER, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 516, -1, 30));
 
         PATRONES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(PATRONES, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 42, 615, 43));
 
         RESULTADO.setColumns(20);
         RESULTADO.setRows(5);
         jScrollPane1.setViewportView(RESULTADO);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 127, 615, 319));
 
         BUSCAR.setBackground(new java.awt.Color(255, 153, 153));
         BUSCAR.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
@@ -115,37 +120,22 @@ public class Ventana3 extends javax.swing.JFrame {
                 BUSCARMouseClicked(evt);
             }
         });
+        jPanel1.add(BUSCAR, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 516, -1, 30));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PATRONES, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(BUSCAR)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(VOLVER)
-                .addGap(140, 140, 140))
+        jPanel2.setBackground(new java.awt.Color(223, 242, 242));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(PATRONES, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(VOLVER, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BUSCAR, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 500, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,6 +227,7 @@ public class Ventana3 extends javax.swing.JFrame {
     private javax.swing.JTextArea RESULTADO;
     private javax.swing.JButton VOLVER;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

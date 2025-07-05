@@ -70,7 +70,7 @@ public class Solucion {
     }
 
     
-     /**
+    /**
      * Busca un patrón específico utilizando la HashTable para mayor eficiencia.
      *
      * @param patron El patrón de ADN a buscar.
@@ -85,10 +85,10 @@ public class Solucion {
     }
     
     /**
-    * Obtiene todos los patrones únicos ordenados por el primer carácter para llenar la lista en Ventana3.
-    *
-    * @return Lista de patrones ordenados alfabéticamente
-    */
+     * Obtiene todos los patrones únicos ordenados por el primer carácter para llenar la lista en Ventana3.
+     *
+     * @return Lista de patrones ordenados alfabéticamente
+     */
     public List<String> OrdenadosAlfabeticamente() {
         if (tablaHashPatrones == null || tablaHashPatrones.isEmpty()) {
             return new ArrayList<>();
@@ -113,7 +113,7 @@ public class Solucion {
     }
     
     /**
-     * Obtiene el patrón más frecuente en tiempo O(log n) promedio.
+     * Obtiene el patrón más frecuente.
      * Usa el método optimizado del árbol binario.
      * 
      * @return El nodo con el patrón más frecuente, o null si no hay patrones
@@ -126,7 +126,7 @@ public class Solucion {
     }
 
    /**
-    * Obtiene el patrón menos frecuente en tiempo O(log n) promedio.
+    * Obtiene el patrón menos frecuente.
     * Usa el método optimizado del árbol binario.
     * 
     * @return El nodo con el patrón menos frecuente, o null si no hay patrones
@@ -136,5 +136,24 @@ public class Solucion {
             return null;
         }
         return arbolPatrones.patronMenosFrecuente();
+    }
+    
+    /**
+     * Genera un reporte de colisiones de la tabla hash de patrones.
+     * 
+     * @return Lista de strings con información detallada de las colisiones
+     */
+    public ArrayList<String> generarReporteColisiones() {
+        if (tablaHashPatrones == null || tablaHashPatrones.isEmpty()) {
+            OrdenadosPorFrecuencia();
+        }
+
+        if (tablaHashPatrones == null || tablaHashPatrones.isEmpty()) {
+            ArrayList<String> reporteVacio = new ArrayList<>();
+            reporteVacio.add("No hay patrones cargados para generar el reporte.");
+            return reporteVacio;
+        }
+
+        return tablaHashPatrones.reporteColisiones();
     }
 }
