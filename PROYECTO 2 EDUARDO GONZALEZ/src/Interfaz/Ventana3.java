@@ -11,8 +11,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- * Tercera ventana del programa
  * Esta ventana permite buscar y mostrar los datos de un patron en especifico.
+ * Tercera ventana del programa.
  * @author edusye
  */
 public class Ventana3 extends javax.swing.JFrame {
@@ -20,7 +20,7 @@ public class Ventana3 extends javax.swing.JFrame {
     private Solucion solucion;
     
     /**
-     * Constructor de Ventana3
+     * Constructor de la Ventana de busqueda de patron
      * 
      * @param ventanaPrincipal La instancia de Ventana1 que la invocó
      * @param solucion La instancia de Solucion con los patrones cargados

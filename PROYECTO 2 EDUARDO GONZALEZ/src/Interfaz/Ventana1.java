@@ -9,11 +9,12 @@ import Codigo.Solucion;
 import java.util.List;
 import javax.swing.JOptionPane;
 import Codigo.ArbolBinario;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 
 /**
- * Clase que representa la ventana principal del programa
- * Esta ventana contiene todos los botones para las funcionalidades solicitadas
+ * Esta ventana contiene todos los botones para las funcionalidades solicitadas.
+ * Clase que representa la ventana principal del programa. 
  * @author edusye
  */
 public class Ventana1 extends javax.swing.JFrame {
@@ -135,6 +136,11 @@ public class Ventana1 extends javax.swing.JFrame {
         LISTA.setFont(new java.awt.Font("Copperplate Gothic Bold", 0, 18)); // NOI18N
         LISTA.setText("LISTA TOTAL");
         LISTA.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LISTA.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LISTAMouseClicked(evt);
+            }
+        });
         jPanel1.add(LISTA, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 520, -1, 50));
 
         jPanel2.setBackground(new java.awt.Color(223, 242, 242));
@@ -183,7 +189,7 @@ public class Ventana1 extends javax.swing.JFrame {
     /**
      * Maneja el evento de clic del botón PATRONES.
      * Valida que haya una secuencia cargada, obtiene los patrones ordenados por frecuencia
-     * Abre la ventana de visualización de patrones (Ventana2).
+     * Abre la ventana de visualización de patrones (Ventana2) con la lista cargada.
      * 
      * @param evt El evento de clic del mouse
      */
@@ -199,10 +205,10 @@ public class Ventana1 extends javax.swing.JFrame {
 
         List<ArbolBinario.Nodo> patronesObtenidos = (List<ArbolBinario.Nodo>) solucion.OrdenadosPorFrecuencia();
 
-        Ventana2 ventana2 = new Ventana2(this);
-        ventana2.mostrarPatrones(patronesObtenidos); 
-        ventana2.setVisible(true);
-        ventana2.setLocationRelativeTo(null);
+        Ventana2 v2 = new Ventana2(this);
+        v2.mostrarPatrones(patronesObtenidos); 
+        v2.setVisible(true);
+        v2.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_PATRONESMouseClicked
 
@@ -227,9 +233,9 @@ public class Ventana1 extends javax.swing.JFrame {
             return;
         }
 
-        Ventana3 ventana3 = new Ventana3(this, solucion);
-        ventana3.setVisible(true);
-        ventana3.setLocationRelativeTo(null);
+        Ventana3 v3 = new Ventana3(this, solucion);
+        v3.setVisible(true);
+        v3.setLocationRelativeTo(null);
         this.setVisible(false);
     }//GEN-LAST:event_BUSCARMouseClicked
     
@@ -336,6 +342,39 @@ public class Ventana1 extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_REPORTEMouseClicked
+    
+    /**
+     * Maneja el evento de clic del botón LISTA.
+     * Genera y muestra la lista completa de aminoacidos, las tripletas que la generan y frecuencia de aparicion.
+     * 
+     * @param evt El evento de clic del mouse
+     */
+    private void LISTAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LISTAMouseClicked
+        try {
+            
+        if (adn == null || !adn.tieneSecuenciaCargada()) {
+            JOptionPane.showMessageDialog(this, "Por favor, carga un archivo de ADN primero.", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (solucion == null) {
+            solucion = new Solucion(adn);
+        } 
+        
+        String listaAminoácidos = solucion.generarListaAminoácidos();
+        Ventana5 v5 = new Ventana5(this);
+        v5.mostrar(listaAminoácidos);
+        v5.setVisible(true);
+        v5.setLocationRelativeTo(null);
+        this.setVisible(false);
+        
+        } catch (HeadlessException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error al generar el reporte: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_LISTAMouseClicked
 
     /**
      * Método principal para ejecutar la aplicación de forma independiente.

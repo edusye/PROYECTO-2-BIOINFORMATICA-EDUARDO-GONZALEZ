@@ -30,7 +30,7 @@ public class ArbolBinario {
          * Constructor del nodo.
          * 
          * @param patron el patrón de ADN a almacenar.
-         * @param posicion la posición inicial donde se encontró el patrón
+         * @param posicionTripleta la posición inicial donde se encontró el patrón
          */
         Nodo(String patron, int posicionTripleta) {
             this.patron = patron;
@@ -55,7 +55,7 @@ public class ArbolBinario {
      * 
      * @param nodo el nodo actual en la recursión
      * @param patron el patrón a insertar
-     * @param posicion la posición del patrón
+     * @param valor la posición del patrón
      * @return el nodo actualizado
      */
     private Nodo insertar(Nodo nodo, String patron, int valor) {
@@ -149,24 +149,6 @@ public class ArbolBinario {
         return raiz == null; 
     }
     
-    /**
-     * Calcula la altura del árbol
-     * 
-     * @return la altura del árbol (número de niveles)
-     */
-    public int altura() { 
-        return altura(raiz); 
-    }
-    
-    /**
-     * Método auxiliar recursivo para calcular la altura.
-     * 
-     * @param nodo el nodo actual en la recursión
-     * @return la altura del subárbol con raíz en el nodo dado
-     */
-    private int altura(Nodo nodo) {
-        return nodo == null ? 0 : 1 + Math.max(altura(nodo.izquierdo), altura(nodo.derecho));
-    }
     
     /**
      * Obtiene el patrón más frecuente.

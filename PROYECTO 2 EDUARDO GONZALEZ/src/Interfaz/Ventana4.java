@@ -7,8 +7,8 @@ package Interfaz;
 import java.util.ArrayList;
 
 /**
- * Cuarta ventana del programa.
  * Ventana para mostrar el reporte de colisiones de la tabla hash.
+ * Cuarta ventana del programa.
  * @author edusye
  */
 public class Ventana4 extends javax.swing.JFrame {
@@ -16,6 +16,7 @@ public class Ventana4 extends javax.swing.JFrame {
     
     /**
      * Constructor de la ventana de reporte.
+     * 
      * @param ventanaPrincipal Referencia a la ventana principal.
      */
     public Ventana4(Ventana1 ventanaPrincipal) {

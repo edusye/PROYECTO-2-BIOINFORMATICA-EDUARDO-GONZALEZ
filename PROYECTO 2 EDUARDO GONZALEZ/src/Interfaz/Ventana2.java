@@ -8,15 +8,15 @@ import Codigo.ArbolBinario;
 import java.util.List;
 
 /**
- * Segunda ventana del programa
- * Esta ventana contiene la lista de patrones almacenados y las muestra en un ScrollPanel
+ * Esta ventana contiene la lista de patrones almacenados y las muestra en un ScrollPanel.
+ * Segunda ventana del programa.
  * @author edusye
  */
 public class Ventana2 extends javax.swing.JFrame {
     private Ventana1 ventanaPrincipal;
     
     /**
-     * Constructor de Ventana3
+     * Constructor de la Ventana que muestra la lista de patrones almacenados
      * 
      * @param ventanaPrincipal La instancia de Ventana1 que la invocó
      */
@@ -95,9 +95,10 @@ public class Ventana2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     /**
-     * Vuelve a la ventana principal (Ventana1).
+     * Maneja el evento de clic del botón VOLVER.
+     * Cierra la ventana actual y muestra la ventana principal si está disponible.
      * 
-     * @param evt El evento de clic del mouse que desencadena esta acción.
+     * @param evt El evento de clic del mouse que desencadena esta acción
      */
     private void VOLVERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VOLVERMouseClicked
         this.dispose(); 

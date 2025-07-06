@@ -296,10 +296,7 @@ public class HashTable<K, V> {
 
         reporte.add(0, "=== REPORTE DE COLISIONES ===");
         reporte.add(1, "Total de colisiones encontradas: " + colisionesEncontradas);
-        reporte.add(2, "Factor de carga actual: " + String.format("%.2f", (double) elementos / tamaño));
-        reporte.add(3, "Tamaño de la tabla: " + tamaño);
-        reporte.add(4, "Elementos almacenados: " + elementos);
-        reporte.add(5, ""); 
+        reporte.add(2, ""); 
 
         return reporte;
     } 
